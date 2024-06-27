@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/ItemHome">
+
+    <fragment
+        android:id="@+id/ItemHome"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/toDetail"
+            app:destination="@id/hobbyDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ItemHistory"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/ItemProfile"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/hobbyDetailFragment"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HobbyDetailFragment"
+        android:label="fragment_hobby_detail"
+        tools:layout="@layout/fragment_hobby_detail" >
+        <argument
+            android:name="hobbyId"
+            app:argType="string" />
+    </fragment>
+</navigation>
