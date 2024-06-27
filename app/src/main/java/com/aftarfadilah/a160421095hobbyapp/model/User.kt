@@ -1,9 +1,23 @@
 package com.aftarfadilah.a160421095hobbyapp.model
 
-class User(
-    val id: Int,
-    val nama_belakang: String,
-    val nama_depan: String,
-    val password: String,
-    val username: String
-)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "User")
+data class User(
+    @ColumnInfo(name = "firstName")
+    var firstName: String,
+
+    @ColumnInfo(name = "lastName")
+    var lastName: String,
+
+    @ColumnInfo(name = "password")
+    var password: String,
+
+    @ColumnInfo(name = "username")
+    var username: String
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}

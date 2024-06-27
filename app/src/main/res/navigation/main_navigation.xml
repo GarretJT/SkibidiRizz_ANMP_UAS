@@ -3,34 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/ItemHome">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.LoginFragment"
+        android:label="Login">
+
+        <action
+            android:id="@+id/actionLoginRegis"
+            app:destination="@id/regisFragment" />
+
+        <action
+            android:id="@+id/actionLoginHome"
+            app:destination="@id/ItemHome" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/regisFragment"
+        android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.RegisFragment"
+        android:label="Registration" >
+        <action
+            android:id="@+id/actionRegisLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/ItemHome"
         android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <!-- Define actions for navigating to other destinations -->
+        <action
+            android:id="@+id/toHistoryFragment"
+            app:destination="@id/ItemHistory" />
+        <action
+            android:id="@+id/toProfileFragment"
+            app:destination="@id/ItemProfile" />
         <action
             android:id="@+id/toDetail"
             app:destination="@id/hobbyDetailFragment" />
+        <!-- Add any other actions as needed -->
     </fragment>
+
     <fragment
         android:id="@+id/ItemHistory"
         android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HistoryFragment"
-        android:label="fragment_history"
+        android:label="History"
         tools:layout="@layout/fragment_history" />
+
     <fragment
         android:id="@+id/ItemProfile"
         android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/hobbyDetailFragment"
         android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.HobbyDetailFragment"
-        android:label="fragment_hobby_detail"
-        tools:layout="@layout/fragment_hobby_detail" >
+        android:label="Hobby Detail"
+        tools:layout="@layout/fragment_hobby_detail">
+        <!-- Define arguments for this fragment -->
         <argument
             android:name="hobbyId"
             app:argType="string" />
     </fragment>
+
 </navigation>
