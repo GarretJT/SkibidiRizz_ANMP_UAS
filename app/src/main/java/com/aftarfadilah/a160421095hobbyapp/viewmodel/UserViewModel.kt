@@ -24,7 +24,19 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
             db.userDao().insertAll(user)
         }
     }
-
+    fun changeUsername(newUsername: String, password: String) {
+        launch {
+            val db = buildDb(getApplication())
+            val currentUser = userLD.value
+            if (currentUser?.password == password) {
+                currentUser.username = newUsername
+                db.userDao().updateUser(currentUser)
+                userLD.postValue(currentUser)
+            } else {
+                // Handle password mismatch
+            }
+        }
+    }
     fun login(username: String, password: String) {
         launch {
             val db = buildDb(getApplication())

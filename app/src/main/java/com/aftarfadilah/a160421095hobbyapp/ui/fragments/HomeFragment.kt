@@ -51,13 +51,12 @@ class HomeFragment : Fragment() {
         binding.recView.layoutManager = LinearLayoutManager(context)
         binding.recView.adapter = hobbyListAdapter
         observeViewModel()
-
     }
     fun observeViewModel() {
-        viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
+        viewModel.hobbiesLD.observe(viewLifecycleOwner, Observer {
             hobbyListAdapter.updateStudentList(it)
         })
-        viewModel.studentLoadErrorLD.observe(viewLifecycleOwner, Observer {
+        viewModel.hobbyLoadLD.observe(viewLifecycleOwner, Observer {
             if(it == true) {
                 binding.txtError?.visibility = View.VISIBLE
             } else {

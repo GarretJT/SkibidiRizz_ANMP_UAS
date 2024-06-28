@@ -15,8 +15,12 @@
             app:destination="@id/regisFragment" />
 
         <action
-            android:id="@+id/actionLoginHome"
-            app:destination="@id/ItemHome" />
+            android:id="@+id/actionLoginProfile"
+            app:destination="@id/ItemProfile">
+            <argument
+                android:name="userId"
+                app:argType="integer" />
+        </action>
     </fragment>
 
     <fragment
@@ -56,7 +60,11 @@
         android:id="@+id/ItemProfile"
         android:name="com.aftarfadilah.a160421095hobbyapp.ui.fragments.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/hobbyDetailFragment"

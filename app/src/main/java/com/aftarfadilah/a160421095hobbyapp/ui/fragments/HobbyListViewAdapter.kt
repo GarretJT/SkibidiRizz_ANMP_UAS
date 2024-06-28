@@ -6,9 +6,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.aftarfadilah.a160421095hobbyapp.R
 import com.aftarfadilah.a160421095hobbyapp.databinding.FragmentHobbyDetailBinding
 import com.aftarfadilah.a160421095hobbyapp.databinding.HobbyListItemBinding
 import com.aftarfadilah.a160421095hobbyapp.model.Hobby
+import com.squareup.picasso.Picasso
 
 class HobbyListViewAdapter(
     val hobbyList: ArrayList<Hobby>
@@ -31,12 +33,12 @@ class HobbyListViewAdapter(
         holder.binding.txtNamaPenulis.text = "${hobbyList[position].username_penulis}"
 
         holder.binding.btnDetail.setOnClickListener {
-            val action = HomeFragmentDirections.toDetail((hobbyList[position].id ?: "").toString())
+            val action = HomeFragmentDirections.toDetail(hobbyList[position].id.toString() ?: "")
             Navigation.findNavController(it).navigate(action)
         }
-//        var imageView = holder.itemView.findViewById<ImageView>(R.id.imageView)
-//        var progressBar = holder.itemView.findViewById<ProgressBar>(R.id.progressBar)
-//        imageView.loadImage(hobbyList[position].photoUrl, progressBar)
+        val picasso = Picasso.Builder(holder.binding.root.context)
+        picasso.listener{picasso, uri, exception -> exception.printStackTrace()}
+        picasso.build().load(hobbyList[position].url_gambar).into(holder.binding.imageView)
     }
     fun updateStudentList(newStudentList: ArrayList<Hobby>) {
         hobbyList.clear()

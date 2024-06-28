@@ -46,7 +46,7 @@ class LoginFragment : Fragment(), UserLoginClickListener {
                 Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
 
                 // Navigate to another screen after successful login
-                val action = LoginFragmentDirections.actionLoginHome()
+                val action = LoginFragmentDirections.actionLoginProfile(user.id)
                 Navigation.findNavController(binding.root).navigate(action)
             } else {
                 Toast.makeText(context, "Invalid username or password", Toast.LENGTH_SHORT).show()
