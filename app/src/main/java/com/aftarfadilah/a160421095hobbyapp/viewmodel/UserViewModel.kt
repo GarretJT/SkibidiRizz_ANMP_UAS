@@ -18,12 +18,23 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
     private val userDao: UserDao = buildDb(application).userDao()
 
     val userLD = MutableLiveData<User>()
+
     fun register(user: User) {
         launch {
-            val db = buildDb(getApplication())
-            db.userDao().insertAll(user)
+            userDao.insertAll(user)
         }
     }
+    fun deleteUser() {
+        launch {
+            val db = buildDb(getApplication())
+            val currentUser = userLD.value
+            currentUser?.let {
+                db.userDao().deleteUser(currentUser)
+            }
+        }
+    }
+
+
     fun changeUsername(newUsername: String, password: String) {
         launch {
             val db = buildDb(getApplication())
@@ -37,23 +48,27 @@ class UserViewModel(application: Application) : AndroidViewModel(application), C
             }
         }
     }
+
+    fun logoutUser() {
+        userLD.postValue(null) // Clear the user data
+        // Perform any additional logout actions as needed
+    }
+
     fun login(username: String, password: String) {
         launch {
-            val db = buildDb(getApplication())
-            userLD.postValue(db.userDao().loginUser(username, password))
+            userLD.postValue(userDao.loginUser(username, password))
         }
     }
 
     fun fetch(id: Int) {
         launch {
-            val db = buildDb(getApplication())
-            userLD.postValue(db.userDao().selectUser(id))
+            userLD.postValue(userDao.selectUser(id))
         }
     }
 
     fun update(user: User) {
         launch {
-            buildDb(getApplication()).userDao().updateUser(user)
+            userDao.updateUser(user)
             userLD.postValue(user)
         }
     }

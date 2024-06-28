@@ -19,6 +19,6 @@ interface UserChangePasswordClickListener{
 }
 interface ProfileUpdateClickListener {
     fun onChangeUsernameClick(v: View)
-    fun onSaveClick(v: View)
     fun onLogOutClick(v: View)
+    fun onDeleteAccountClick(v: View)
 }

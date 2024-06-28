@@ -64,6 +64,9 @@
         <argument
             android:name="userId"
             app:argType="integer" />
+        <action
+            android:id="@+id/actionProfileLogin"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
