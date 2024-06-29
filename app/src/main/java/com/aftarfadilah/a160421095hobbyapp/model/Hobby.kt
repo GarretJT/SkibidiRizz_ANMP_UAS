@@ -1,16 +1,21 @@
 package com.aftarfadilah.a160421095hobbyapp.model
 
-class Hobby(
-    val id: Int,
-    val judul: String?,
-    val id_penulis: Int?,
-    val penulis: User?,
-    val url_gambar: String?,
-    val username_penulis: String,
-    val artikel: Array<HobbyArticleList>
-)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class HobbyArticleList(
-    val judul_artikel: String,
-    val konten: String,
+@Entity
+data class Hobby(
+    @ColumnInfo("image")
+    var image:String,
+    @ColumnInfo("title")
+    var title:String,
+    @ColumnInfo("author")
+    var author:String,
+    @ColumnInfo("desc")
+    var desc:String,
 )
+{
+    @PrimaryKey(autoGenerate = true)
+    var uuid:Int = 0
+}

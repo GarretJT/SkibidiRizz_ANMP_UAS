@@ -6,9 +6,10 @@ import androidx.room.RoomDatabase
 import androidx.room.Room
 import com.aftarfadilah.a160421095hobbyapp.util.DB_NAME
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class, Hobby::class], version = 2) // Increment version number
 abstract class HobbyDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun hobbyDao(): HobbyDao
 
     companion object {
         @Volatile private var instance: HobbyDatabase? = null

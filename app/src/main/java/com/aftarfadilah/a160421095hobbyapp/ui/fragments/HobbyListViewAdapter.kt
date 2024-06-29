@@ -1,51 +1,46 @@
 package com.aftarfadilah.a160421095hobbyapp.ui.fragments
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
+import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.aftarfadilah.a160421095hobbyapp.R
-import com.aftarfadilah.a160421095hobbyapp.databinding.FragmentHobbyDetailBinding
 import com.aftarfadilah.a160421095hobbyapp.databinding.HobbyListItemBinding
 import com.aftarfadilah.a160421095hobbyapp.model.Hobby
+import com.aftarfadilah.a160421095hobbyapp.ui.activities.ButtonActionNavClickListener
 import com.squareup.picasso.Picasso
 
-class HobbyListViewAdapter(
-    val hobbyList: ArrayList<Hobby>
-): RecyclerView.Adapter<HobbyListViewAdapter.HobbyViewHolder>() {
-    class HobbyViewHolder(var binding: HobbyListItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+class HobbyListViewAdapter (val homeList: ArrayList<Hobby>)
+    :RecyclerView.Adapter<HobbyListViewAdapter.HomeViewHolder>(), ButtonActionNavClickListener {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): HobbyListViewAdapter.HobbyViewHolder {
-        val binding = HobbyListItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return HobbyListViewAdapter.HobbyViewHolder(binding)
+    class HomeViewHolder(var binding: HobbyListItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+        val binding = HobbyListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HomeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HobbyViewHolder, position: Int) {
-        holder.binding.txtJudul.text = hobbyList[position].judul
-        holder.binding.txtNamaPenulis.text = "${hobbyList[position].username_penulis}"
-
-        holder.binding.btnDetail.setOnClickListener {
-            val action = HomeFragmentDirections.toDetail(hobbyList[position].id.toString() ?: "")
-            Navigation.findNavController(it).navigate(action)
-        }
-        val picasso = Picasso.Builder(holder.binding.root.context)
-        picasso.listener{picasso, uri, exception -> exception.printStackTrace()}
-        picasso.build().load(hobbyList[position].url_gambar).into(holder.binding.imageView)
+    override fun getItemCount(): Int {
+        return homeList.size
     }
-    fun updateStudentList(newStudentList: ArrayList<Hobby>) {
-        hobbyList.clear()
-        hobbyList.addAll(newStudentList)
+
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+        holder.binding.hobby = homeList[position]
+        holder.binding.navListener = this
+    }
+
+    fun updateHomeList(newHomeList: List<Hobby>){
+        homeList.clear()
+        homeList.addAll(newHomeList)
         notifyDataSetChanged()
     }
-    override fun getItemCount(): Int {
-        return hobbyList.size
+
+    override fun onButtonActionNavClick(v: View) {
+        val id = v.tag.toString()
+        val action = HomeFragmentDirections.toDetail(id)
+        Navigation.findNavController(v).navigate(action)
     }
+
+
 }

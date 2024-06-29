@@ -22,3 +22,7 @@ interface ProfileUpdateClickListener {
     fun onLogOutClick(v: View)
     fun onDeleteAccountClick(v: View)
 }
+
+interface ButtonActionNavClickListener {
+    fun onButtonActionNavClick(v: View)
+}
