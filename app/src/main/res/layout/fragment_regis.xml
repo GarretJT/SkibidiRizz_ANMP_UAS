@@ -12,63 +12,62 @@
             type="com.aftarfadilah.a160421095hobbyapp.ui.activities.UserSignUpClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:inputType="text"
+            android:autofillHints="firstName"
+            android:text="@={user.firstName}"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:inputType="text"
+            android:autofillHints="lastName"
+            android:text="@={user.lastName}"
+            android:layout_marginBottom="12dp" />
 
         <EditText
             android:id="@+id/editTextUsername"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
             android:inputType="text"
+            android:autofillHints="username"
             android:text="@={user.username}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="12dp" />
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
             android:text="@={user.password}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
-
-        <EditText
-            android:id="@+id/editTextFirstName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:inputType="text"
-            android:text="@={user.firstName}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
-        <EditText
-            android:id="@+id/editTextLastName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:inputType="text"
-            android:text="@={user.lastName}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/buttonSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="32dp"
             android:text="Sign Up"
             android:onClick="@{addlistener::onUserSignUpClick}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextLastName" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

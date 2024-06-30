@@ -26,3 +26,7 @@ interface ProfileUpdateClickListener {
 interface ButtonActionNavClickListener {
     fun onButtonActionNavClick(v: View)
 }
+
+interface BottomNavVisibilityHandler {
+    fun setBottomNavVisibility(isVisible: Boolean)
+}

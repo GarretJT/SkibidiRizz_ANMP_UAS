@@ -1,5 +1,6 @@
 package com.aftarfadilah.a160421095hobbyapp.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.aftarfadilah.a160421095hobbyapp.databinding.FragmentLoginBinding
 import com.aftarfadilah.a160421095hobbyapp.model.User
+import com.aftarfadilah.a160421095hobbyapp.ui.activities.BottomNavVisibilityHandler
 import com.aftarfadilah.a160421095hobbyapp.viewmodel.UserViewModel
 import com.aftarfadilah.a160421095hobbyapp.ui.activities.UserLoginClickListener
 
@@ -18,6 +20,22 @@ class LoginFragment : Fragment(), UserLoginClickListener {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: UserViewModel
+
+    private var bottomNavVisibilityHandler: BottomNavVisibilityHandler? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is BottomNavVisibilityHandler) {
+            bottomNavVisibilityHandler = context
+        } else {
+            throw RuntimeException("$context must implement BottomNavVisibilityHandler")
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        bottomNavVisibilityHandler?.setBottomNavVisibility(true) // Show bottom nav when fragment is destroyed
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +47,8 @@ class LoginFragment : Fragment(), UserLoginClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        bottomNavVisibilityHandler?.setBottomNavVisibility(false) // Hide bottom nav
 
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
@@ -45,7 +65,7 @@ class LoginFragment : Fragment(), UserLoginClickListener {
             if (user != null) {
                 Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
 
-                // Navigate to another screen after successful login
+                // Navigate to profile fragment after successful login
                 val action = LoginFragmentDirections.actionLoginProfile(user.id)
                 Navigation.findNavController(binding.root).navigate(action)
             } else {
