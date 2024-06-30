@@ -1,6 +1,7 @@
 package com.aftarfadilah.a160421095hobbyapp.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.aftarfadilah.a160421095hobbyapp.model.User
@@ -12,12 +13,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
+
 class UserViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
 
     private val job = Job()
     private val userDao: UserDao = buildDb(application).userDao()
 
-    val userLD = MutableLiveData<User>()
+    val userLD = MutableLiveData<User?>()
 
     fun register(user: User) {
         launch {
